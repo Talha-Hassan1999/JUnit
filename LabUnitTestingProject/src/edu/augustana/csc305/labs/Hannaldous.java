@@ -1,3 +1,7 @@
+/**
+ *Author: Talha Hassan
+ *Course: 305
+ */
 package edu.augustana.csc305.labs;
 
 // Supervisor's note: Here's the smelly code that Hannaldous left us...
@@ -21,40 +25,57 @@ package edu.augustana.csc305.labs;
 //         (read Skrien appendix B, pp 318-331)
 
 public class Hannaldous {
-	
-	// method one to do the thing for Monday's meeting 
-	public static int howbad(int n, String[] x, double roXORZ) {
-		int j = x.length - 1;
-		int ret = 0;
-		n = n; // n = ? 
-		for (int i = 0; i < x.length; i = i + 1) 
-		{
-		if (x[j].length() < n || Help(x[j]).equals("y"))
-			ret++;
-	j--;  }
-		return ret;
-						}
-	// method two helps, and i wrote it at 11:58 p.m. on sunday... 
-	// couldn't find it on stack overflow, so I rolled my pwn. 
-	static String Help(String MAYBE) 
-	{		
-		int yeah = -1;
-		while (yeah++ < MAYBE.length() - 1) {
-			char izard /*PoKeMoN babee*/ = MAYBE.charAt(yeah); 
-			
-			if (! (izard >= 'a' && izard <='z'|| izard >='A' && izard <= 'Z')) return "n"; }
-		return "y";
+
+	/**
+	 * This method goes through the list of passwords to check if they are eligible
+	 * based on the set limit.
+	 * @param limit: limit is an int parameter which helps evaluate the length of a password.
+	 * @param listStrings: It comprises of the list of passwords to be checked
+	 * @return num: It is the number of bad passwords found.
+	 */
+	public static int numIncorrectPasswords(int limit, String[] listStrings) {
+		int j = listStrings.length - 1;
+		int num = 0;
+
+		for (int i = 0; i < listStrings.length; i++) {
+			if (listStrings[j].length() < limit || passwordStatus(listStrings[j]).equals("y")) {
+				num++;
+
+			}
+			j--;
+		}
+		return num;
 	}
-	
-	
+
+	/**
+	 * This method goes through the String passed as parameter
+	 *  to check if they are eligible based on the conditional statement(which checks characters).
+	 * @param strings: It comprises of the password as string
+	 * @return: It returns a "yes" or "no: response of type String
+	 */
+
+	static String passwordStatus(String string) {
+		int slot = -1;
+		while (slot++ < string.length() - 1) {
+			char character = string.charAt(slot);
+
+			if (!(character >= 'a' && character <= 'z' || character >= 'A' && character <= 'Z')) {
+				return "no";
+			}
+		}
+
+		return "yes";
+
+	}
+
 	public static void main(String[] args) {
-		
-		System.out.println(Help("bigmoose$"));
-		System.out.println(Help("emusareawesome"));
-		System.out.println(Help("17"));
+
+		System.out.println(passwordStatus("bigmoose$"));
+		System.out.println(passwordStatus("emusareawesome"));
+		System.out.println(passwordStatus("17"));
 
 		String[] passwords = new String[] { "bigmoose$", "emusareawesome", "123goodbye", "ok&y", "17", "cat" };
-		System.out.println(howbad(8,passwords, 0.0));
+		System.out.println(numIncorrectPasswords(8, passwords));
 	}
 
 }

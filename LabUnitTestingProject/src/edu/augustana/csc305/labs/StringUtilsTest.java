@@ -29,8 +29,15 @@ public class StringUtilsTest {
 	public void testCaesarCipherMore() {
 		assertEquals("", StringUtils.caesarCipher("", 10)); // always test the corner cases! 
 		// ADD your own assert tests here, to find any remaining bugs in this code
+		//test corners (negative)
+		assertEquals("", StringUtils.caesarCipher("", -10));
+		// Always be decoded using a negative number
+		assertEquals("A", StringUtils.caesarCipher("Z", -25));
+		// wrap around case
+		assertEquals("AAZ", StringUtils.caesarCipher("ZZY", 1));
+		
 	}
 
-
-
 }
+
+
